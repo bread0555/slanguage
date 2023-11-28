@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'slanguage-front-end';
+
+  test = "1"
 }
