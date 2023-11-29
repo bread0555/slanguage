@@ -9,6 +9,9 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { ToastModule } from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ButtonModule,
     DropdownModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MessagesModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,17 +1,23 @@
 import { Component } from '@angular/core';
 import { User } from '../../../interfaces/user.ts';
+import { UserService } from '../../../services/user.service.js';
+import { MessageService } from 'primeng/api/messageservice.js';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.css'
+  styleUrl: './landing-page.component.css',
+  providers: [MessageService]
 })
 export class LandingPageComponent {
   user: User = {
+    Id: 0,
     Name: '',
     Pin: 0,
     Language: 'Languages'
   }
+
+  constructor (private userService: UserService, private messageService: MessageService) {}
 
   userPin!: number
 
@@ -41,30 +47,30 @@ export class LandingPageComponent {
   }
 
   createNewUser(): void {
+    this.user.Id = Math.random() * 100
     this.user.Language = this.selectedLanguage.name
     this.user.Pin = this.userPin
-    let allUsers: User[] = JSON.parse(window.localStorage.getItem("slanguage-User") as string)
 
+    let allUsers: User[] = this.userService.getUsers()
+
+    console.log(allUsers)
+    
     // NO CURRENT USERS
     if (allUsers == null) {
-      window.localStorage.setItem("slanguage-User", JSON.stringify([this.user]))      
+      let allUsers = [this.user]
+      this.userService.putUsers(allUsers)
     }
     else {
       // USERS ALREADY EXISTS
-      window.localStorage.setItem("slanguage-User", JSON.stringify(allUsers.push(this.user)))
+      allUsers.push(this.user)
+      this.userService.putUsers(allUsers)
     }
   }
 
   login(): void {
     this.user.Pin = this.userPin
-    let users: User[] = JSON.parse(window.localStorage.getItem("slanguage-User") as string)
-    for (let i = 0; i < users.length; i++) {
-      let savedUser = users[i]
-
-      if (savedUser.Name == this.user.Name && savedUser.Pin == this.user.Pin) {
-        console.log("TRUEEE")
-      }
-      
+    if (this.userService.userLogin(this.user)) {
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
     }
   }
 
