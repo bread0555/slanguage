@@ -1,0 +1,57 @@
+<div class="w-screen h-screen backgroundy">
+
+    <!-- top image -->
+    <div class=" grid place-items-center">
+        <div class=" w-96 h-48 rounded-b-full absolute top-0 bg-Sblue-200 grid">
+            <img src="../assets/slanguage-logo-transparent.png" class="h-48 place-self-center">
+        </div>
+    </div>
+
+    <div class="grid place-items-center mt-80">
+        <h1 class="text-4xl text-gray-400 font-semibold tracking-wide">WELCOME</h1>
+
+        <div class="mt-2 mr-4">
+
+            <!-- entername input -->
+            <div class="flex my-7">
+                <div class="w-9 h-9 bg-red-400 rounded-full opacity-80" *ngIf="!checkIfValid('name')"></div>
+                <div class="w-9 h-9 bg-emerald-400 rounded-full opacity-80" *ngIf="checkIfValid('name')"></div>
+                <input type="text" class=" ml-2 outline outline-2 text-center outline-gray-400 bg-opacity-10 bg-slate-100" placeholder="Enter Name" [(ngModel)]="user.Name">
+            </div>
+
+            <!-- enter pin input -->
+            <div class="flex my-7">
+                <div class="w-9 h-9 bg-red-400 rounded-full opacity-80" *ngIf="!checkIfValid('pin')"></div>
+                <div class="w-9 h-9 bg-emerald-400 rounded-full opacity-80" *ngIf="checkIfValid('pin')"></div>
+                <input type="text" class=" ml-2 outline outline-2 outline-gray-400 text-center bg-opacity-10 bg-slate-100" placeholder="Enter Pin" [(ngModel)]="userPin">
+            </div>
+
+            <!-- select a language -->
+            <div class="ml-12" *ngIf="!exsistingUser">
+                <p-dropdown [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="name" [showClear]="true" placeholder="Languages" class="w-16" styleClass="outline-2 outline outline-gray-400 w-fit bg-opacity-10 bg-slate-100">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2" *ngIf="selectedLanguage">
+                            <img [src]="selectedLanguage.code" width="18px">
+                            <div>{{ selectedLanguage.name }}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-language pTemplate="item" >
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="language.code" width="18px"/>
+                            <div>{{ language.name }}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+
+            <!-- submit user login -->
+            <div class="text-center m-5">
+                <button *ngIf="!exsistingUser" class="outline outline-2 outline-gray-400 p-2 rounded-sm bg-opacity-50 bg-slate-100" (click)="createNewUser()">Create User</button>
+                <button *ngIf="exsistingUser" class="outline outline-2 outline-gray-400 p-2 ml-4 rounded-sm bg-opacity-50 bg-slate-100" (click)="login()">Login</button>
+                <button *ngIf="exsistingUser" class="outline outline-2 outline-gray-400 p-2 ml-4 rounded-sm bg-opacity-50 bg-slate-100" (click)="exsistingUser = false">Create New</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
