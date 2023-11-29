@@ -70,6 +70,10 @@ export class LandingPageComponent {
 
   checkIfValid(field: string): boolean {    
     let users: User[] = JSON.parse(window.localStorage.getItem("slanguage-User") as string)
+    if (!this.exsistingUser) {
+      return false
+    }
+
     for (let i = 0; i < users.length; i++) {
       let savedUser = users[i]
 
