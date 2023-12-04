@@ -1,1 +1,9 @@
-<app-landing-page></app-landing-page>
+<div class="backgroundy w-screen h-screen">
+    <div class="flex">
+        <!-- ADD SLIDING MENU FROM HOVER  -->
+        <div *ngIf="router.url != '/login'" class="bg-Sblue-200 w-1/6 h-screen p-8">
+            <h1>MENU</h1>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>

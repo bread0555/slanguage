@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { User } from '../../../interfaces/user.ts';
 import { UserService } from '../../../services/user.service.js';
-import { MessageService } from 'primeng/api/messageservice.js';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css',
-  providers: [MessageService]
+  providers: [ MessageService ]
 })
 export class LandingPageComponent {
   user: User = {
@@ -17,7 +18,7 @@ export class LandingPageComponent {
     Language: 'Languages'
   }
 
-  constructor (private userService: UserService, private messageService: MessageService) {}
+  constructor (private userService: UserService, private messageService: MessageService, private router: Router) {}
 
   userPin!: number
 
@@ -33,17 +34,12 @@ export class LandingPageComponent {
     this.languages = [
       { name: 'English', code: 'https://cdn-icons-png.flaticon.com/128/330/330425.png' },
       { name: 'German', code: 'https://cdn-icons-png.flaticon.com/128/330/330523.png' },
-      { name: 'Spainish', code: 'https://cdn-icons-png.flaticon.com/128/206/206724.png' },
+      { name: 'Spanish', code: 'https://cdn-icons-png.flaticon.com/128/206/206724.png' },
     ];
 
     if (JSON.parse(window.localStorage.getItem("slanguage-User") as string) == null) {
-      console.log("NEW USER")
       this.exsistingUser = false
     }
-
-    // JSON.parse(window.localStorage.getItem("slanguage-User") as string);
-    // window.localStorage.removeItem("slanguage-User");
-    // window.localStorage.setItem("slanguage-User", JSON.stringify(arguements))
   }
 
   createNewUser(): void {
@@ -55,6 +51,8 @@ export class LandingPageComponent {
 
     console.log(allUsers)
     
+    // ADD ERROR HANDLING
+
     // NO CURRENT USERS
     if (allUsers == null) {
       let allUsers = [this.user]
@@ -65,12 +63,23 @@ export class LandingPageComponent {
       allUsers.push(this.user)
       this.userService.putUsers(allUsers)
     }
+
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Account created successfully'});
+    setTimeout(() => {
+      this.router.navigate(["/home"])
+    }, 1000)
   }
 
   login(): void {
     this.user.Pin = this.userPin
     if (this.userService.userLogin(this.user)) {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged in successfully'});
+      setTimeout(() => {
+        this.router.navigate(["/home"])
+      }, 1000)
+    }
+    else {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login Details Invalid'});
     }
   }
 

@@ -11,24 +11,35 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
+import { MessageService } from 'primeng/api';
+import { RouterModule } from '@angular/router';
+import { HomePageComponent } from './home-page/home-page.component';
+import { LessonPageComponent } from './lesson-page/lesson-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
+    HomePageComponent,
+    LessonPageComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    // AppRoutingModule,
+    RouterModule.forRoot([
+      { path: "login", component: LandingPageComponent },
+      { path: "home", component: HomePageComponent }
+    ]),
     ButtonModule,
     DropdownModule,
     FormsModule,
     BrowserAnimationsModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    MessagesModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
