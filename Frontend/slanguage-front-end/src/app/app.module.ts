@@ -29,7 +29,8 @@ import { LessonPageComponent } from './lesson-page/lesson-page.component';
     // AppRoutingModule,
     RouterModule.forRoot([
       { path: "login", component: LandingPageComponent },
-      { path: "home", component: HomePageComponent }
+      { path: "home", component: HomePageComponent },
+      { path: "lesson", component: LessonPageComponent }
     ]),
     ButtonModule,
     DropdownModule,
