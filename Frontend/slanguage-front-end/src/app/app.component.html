@@ -1,19 +1,25 @@
 <div class="backgroundy w-screen h-screen">
-    <div class="flex">
-        <!-- ADD SLIDING MENU FROM HOVER  -->
-        <div class="w-1/6">
-            <div *ngIf="router.url != '/login'" class="group bg-Sblue-200 bg-opacity-70 w-64 h-52 rounded-br-full hover:rounded-none hover:h-screen transition delay-200 transition-all duration-1000">
-                <div class="flex">
-                    <img src="../assets/slanguage-logo-transparent.png" class="w-52 group-hover:w-24 transition delay-200 transition-all duration-1000">
-                    <h1 class="animate__animated animate__fadeIn hidden group-hover:block text-xl text-Sblack-400 pt-4 tracking-wide">Slanguage</h1>
-                </div>
-                <div>
-                    
-                </div>
+    <!-- NAV BAR -->
+    <div *ngIf="router.url != '/login'" class="h-16 flex bg-Sblue-300 bg-opacity-30">
+        <div class="grid place-content-center">
+            <img src="../assets/slanguage-logo-transparent.png" width="80px" alt="" srcset="">
+        </div>
+        <div class="grid grid-cols-3 w-full place-content-center place-self-center text-Sblack-200">
+            <div class="text-center place-self-center">
+                <a href="/home">Home</a>
+                <div *ngIf="router.url == '/home'" class="bg-Sblue-700 rounded-full w-12 h-1 text-center"></div>
+            </div>
+            <div class="text-center place-self-center">
+                <a href="/lesson">Defintions</a>
+                <div *ngIf="router.url == '/lesson'" class="bg-Sblue-700 rounded-full w-20 h-1 text-center"></div>
+            </div>
+            <div class="text-center place-self-center">
+                <a href="/quiz">Quizzes</a>
+                <div *ngIf="router.url == '/quiz'" class="bg-Sblue-700 rounded-full w-16 h-1 text-center"></div>
             </div>
         </div>
-        <div class="w-5/6">
-            <router-outlet></router-outlet>
-        </div>
+    </div>
+    <div style="height: 100vh;" class="overflow-y-scroll">
+        <router-outlet></router-outlet>
     </div>
 </div>

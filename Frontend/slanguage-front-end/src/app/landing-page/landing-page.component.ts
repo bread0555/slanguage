@@ -64,7 +64,7 @@ export class LandingPageComponent {
       this.userService.putUsers(allUsers)
     }
 
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Account created successfully'});
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Account created successfully', sticky: false});
     setTimeout(() => {
       this.router.navigate(["/home"])
     }, 1000)
@@ -73,13 +73,13 @@ export class LandingPageComponent {
   login(): void {
     this.user.Pin = this.userPin
     if (this.userService.userLogin(this.user)) {
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged in successfully'});
+      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged in successfully',  sticky: false});
       setTimeout(() => {
         this.router.navigate(["/home"])
       }, 1000)
     }
     else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login Details Invalid'});
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login Details Invalid',  sticky: false});
     }
   }
 

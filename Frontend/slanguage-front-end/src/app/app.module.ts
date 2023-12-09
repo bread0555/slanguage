@@ -15,6 +15,8 @@ import { MessageService } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
 import { LessonPageComponent } from './lesson-page/lesson-page.component';
+import { QuizPageComponent } from './quiz-page/quiz-page.component';
+import { QuestionComponent } from './question/question.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { LessonPageComponent } from './lesson-page/lesson-page.component';
     LandingPageComponent,
     HomePageComponent,
     LessonPageComponent,
+    QuizPageComponent,
+    QuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,8 +41,7 @@ import { LessonPageComponent } from './lesson-page/lesson-page.component';
     FormsModule,
     BrowserAnimationsModule,
     MessagesModule,
-    ToastModule,
-    MessagesModule
+    ToastModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
