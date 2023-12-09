@@ -34,7 +34,8 @@ import { QuestionComponent } from './question/question.component';
     RouterModule.forRoot([
       { path: "login", component: LandingPageComponent },
       { path: "home", component: HomePageComponent },
-      { path: "lesson", component: LessonPageComponent }
+      { path: "lesson", component: LessonPageComponent },
+      { path: "quiz", component: QuizPageComponent }
     ]),
     ButtonModule,
     DropdownModule,
