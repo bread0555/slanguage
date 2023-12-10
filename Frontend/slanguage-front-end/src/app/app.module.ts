@@ -17,6 +17,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LessonPageComponent } from './lesson-page/lesson-page.component';
 import { QuizPageComponent } from './quiz-page/quiz-page.component';
 import { QuestionComponent } from './question/question.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { QuestionComponent } from './question/question.component';
     FormsModule,
     BrowserAnimationsModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    HttpClientModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

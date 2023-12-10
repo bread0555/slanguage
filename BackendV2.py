@@ -1,5 +1,25 @@
 # TEST TEST TEST
 from transformers import pipeline
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # This will enable CORS for all routes
+
+@app.route('/translate/<string:language>/<string:text>', methods=['GET'])
+def translate_function(language, text):
+    # return jsonify({'translation': language})
+    if language in SUPPORTED_LANGUAGES:
+        try:
+            translator = pipeline("translation", model=SUPPORTED_LANGUAGES[language])
+            translation_result = translator(text)
+            return ({'translation': translation_result[0]['translation_text']})
+        except Exception as e:
+            return f"Error during translation: {str(e)}"
+    else:
+        return f"Translation for {language} is not supported."
+
+
 
 SUPPORTED_LANGUAGES = {
     # Add more languages and their corresponding models here
@@ -60,6 +80,8 @@ def translate_item(language, item):
         return f"Translation for {language} is not supported."
 
 
+if __name__ == '__main__':
+    app.run(port=5000)
 # Example usage
-translated_item = translate_item('russian', "It's a very beautiful day")
-print(translated_item)
+# translated_item = translate_item('russian', "It's a very beautiful day")
+# print(translated_item)

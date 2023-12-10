@@ -1,1 +1,24 @@
-<app-question></app-question>
+<div class="">
+    <div class="my-4">
+        <div class="flex justify-center">
+            <div class="w-8 h-6 bg-emerald-300 rounded-l-full"></div>
+            <div class="w-8 h-6 bg-emerald-300"></div>
+            <div class="w-8 h-6 bg-emerald-100"></div>
+            <div class="w-8 h-6 bg-emerald-100"></div>
+            <div class="w-8 h-6 bg-emerald-100"></div>
+            <div class="w-8 h-6 bg-emerald-100"></div>
+            <div class="w-8 h-6 bg-emerald-100"></div>
+            <div class="w-8 h-6 bg-emerald-100"></div>
+            <div class="w-8 h-6 bg-emerald-100"></div>
+            <div class="w-8 h-6 bg-emerald-100 rounded-r-full"></div>
+            <h3 class="absolute left-36 font-light">20% Completed</h3>
+        </div>
+    </div>
+    <div *ngFor="let question of slangQuestions">
+        <app-question
+        *ngIf="slangQuestions.indexOf(question) == 0"
+        [question]="question"
+        (answered)="questionAnswered($event)"
+        ></app-question>
+    </div>
+</div>
