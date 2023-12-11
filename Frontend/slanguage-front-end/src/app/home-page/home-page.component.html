@@ -15,21 +15,24 @@
             Pracitice your knowledge of Aussie Slang and recieve instant feedback.
         </div>
         <div class="flex">
+            <button *ngIf="percentageCompleted" class="w-36 p-4 mt-6 bg-Sblue-400 rounded-md hover:bg-Sblue-600 transition duration-500">Resume</button>
+            <button *ngIf="!percentageCompleted" class="w-36 p-4 mt-6 bg-Sblue-400 rounded-md hover:bg-Sblue-600 transition duration-500">Start</button>
             <!-- PROGRESS BAR -->
             <div>
                 <div class="flex mt-10 mx-4">
-                    <div class="bg-emerald-400 h-5 w-5 rounded-l-full"></div>
-                    <div class="bg-emerald-400 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5"></div>
-                    <div class="bg-emerald-100 h-5 w-5 rounded-r-full"></div>
+                    <div class=" h-5 w-5 rounded-l-full" [ngStyle]="{'background-color': percentageCompleted >= 10? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 10? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 20? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 30? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 40? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 50? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 60? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 70? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 80? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5" [ngStyle]="{'background-color': percentageCompleted >= 80? '#34d399' : '#d1fae5'}"></div>
+                    <div class=" h-5 w-5 rounded-r-full" [ngStyle]="{'background-color': percentageCompleted >= 10? '#34d399' : '#d1fae5'}"></div>
                 </div>
-                <h3 class="w-full text-center">20% completed</h3>
+                <h3 class="w-full text-center">{{percentageCompleted}}% completed</h3>
             </div>
         </div>
     </div>
@@ -40,9 +43,9 @@
                 <div class="w-20 h-11 rounded-t-full bg-slate-500 ml-6"></div>
             </div>
             <div class="ml-8 mt-8">
-                <h2>Frederick</h2>
-                <h2>21 / 7 / 08</h2>
-                <h2>Points: 12</h2>
+                <h2>{{userSerivce.activeUser.Name}}</h2>
+                <h2 *ngIf="!userSerivce.activeUser.Points">Points: 0</h2>
+                <h2 *ngIf="userSerivce.activeUser.Points">Points: {{userSerivce.activeUser.Points}}</h2>
             </div>
         </div>
     </div>
