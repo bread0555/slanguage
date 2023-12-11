@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslationService } from '../../../services/translation.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-lesson-page',
@@ -11,7 +12,7 @@ export class LessonPageComponent implements OnInit {
 
   language: string = "english"
 
-  constructor (private translationService: TranslationService) {}
+  constructor (private translationService: TranslationService, public userService: UserService) {}
 
   ngOnInit(): void {
     this.words = [
@@ -46,7 +47,7 @@ export class LessonPageComponent implements OnInit {
   }
 
   translateDefintions(lang: string): void {
-    this.language = lang
+    this.language = lang.toLowerCase()
     let allWords: string = ""   
     for (let i = 0; i < this.words.length; i++) {
       const defintion = this.words[i].Definition;
@@ -56,7 +57,7 @@ export class LessonPageComponent implements OnInit {
       //   console.log(translation)
       // })
     }
-    this.translationService.getTranslation(lang, allWords).subscribe((translation: any) => {
+    this.translationService.getTranslation(this.language, allWords).subscribe((translation: any) => {
       allWords = translation.translation
       console.log(allWords)
       let allDefintions: string[] = allWords.split(" , ")

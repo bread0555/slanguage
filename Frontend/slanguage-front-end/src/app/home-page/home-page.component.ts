@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -8,12 +9,15 @@ import { UserService } from '../../../services/user.service';
 })
 export class HomePageComponent implements OnInit {
   
-  constructor(public userSerivce: UserService) {}
+  constructor(public userSerivce: UserService, public router: Router) {}
 
   percentageCompleted: number = 0
 
   ngOnInit(): void {
-    this.percentageCompleted = (this.userSerivce.activeUser.Points / 27) * 100
-    console.log(this.percentageCompleted)
+    this.percentageCompleted = Math.round((this.userSerivce.activeUser.Points / 27) * 100)
+  }
+
+  logOut(): void {
+    this.userSerivce.logOut()
   }
 }

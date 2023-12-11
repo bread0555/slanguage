@@ -1,17 +1,24 @@
 <div class="">
     <div class="my-4">
         <div class="flex justify-center">
-            <div class="w-8 h-6 bg-emerald-300 rounded-l-full"></div>
-            <div class="w-8 h-6 bg-emerald-300"></div>
-            <div class="w-8 h-6 bg-emerald-100"></div>
-            <div class="w-8 h-6 bg-emerald-100"></div>
-            <div class="w-8 h-6 bg-emerald-100"></div>
-            <div class="w-8 h-6 bg-emerald-100"></div>
-            <div class="w-8 h-6 bg-emerald-100"></div>
-            <div class="w-8 h-6 bg-emerald-100"></div>
-            <div class="w-8 h-6 bg-emerald-100"></div>
-            <div class="w-8 h-6 bg-emerald-100 rounded-r-full"></div>
-            <h3 class="absolute left-36 font-light">20% Completed</h3>
+            <div class=" h-6 w-8 rounded-l-full" [ngStyle]="{'background-color': percentageCompleted >= 10? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 10? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 20? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 30? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 40? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 50? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 60? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 70? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 80? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8" [ngStyle]="{'background-color': percentageCompleted >= 80? '#34d399' : '#d1fae5'}"></div>
+            <div class=" h-6 w-8 rounded-r-full" [ngStyle]="{'background-color': percentageCompleted >= 10? '#34d399' : '#d1fae5'}"></div>
+            <h3 class="absolute left-36 font-light">{{percentageCompleted}}% Completed</h3>
+        </div>
+        <div *ngIf="userService.activeUser.Language != 'English'" class="grid grid-cols-2 mx-5 mt-5">
+            <button class=" rounded-l-md bg-Sblue-300 py-3" (click)="translateQuestion('english')" *ngIf="language == 'english'">English</button>
+            <button class=" rounded-l-md bg-Sblue-300 py-3 bg-opacity-20" (click)="translateQuestion('english')" *ngIf="language != 'english'">English</button>
+            <button class=" rounded-r-md bg-Sblue-300 bg-opacity-20 py-3" (click)="translateQuestion(userService.activeUser.Language)" *ngIf="language.toLocaleLowerCase() != userService.activeUser.Language.toLocaleLowerCase()">{{userService.activeUser.Language | titlecase}}</button>
+            <button class=" rounded-r-md bg-Sblue-300 py-3" (click)="translateQuestion(userService.activeUser.Language)" *ngIf="language.toLocaleLowerCase() == userService.activeUser.Language.toLocaleLowerCase()">{{userService.activeUser.Language | titlecase}}</button>
         </div>
     </div>
     <div *ngFor="let question of slangQuestions">

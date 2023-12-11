@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.ts';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   users: User[] = []
 
@@ -44,6 +45,18 @@ export class UserService {
     }
 
     return false
+  }
+
+  // LOG OUT
+  logOut(): void {
+    this.activeUser = {
+      Id: 0,
+      Name: '',
+      Pin: 0,
+      Language: '',
+      Points: 0
+    }
+    this.router.navigate(['/login'])
   }
 
 }

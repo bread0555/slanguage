@@ -3,11 +3,11 @@
         <h1 class="text_center text-5xl">Definitions</h1>
     </div> -->
     <div class="flex flex-col">
-        <div class="grid grid-cols-2 mx-5 mt-5">
+        <div *ngIf="userService.activeUser.Language != 'English'" class="grid grid-cols-2 mx-5 mt-5">
             <button class=" rounded-l-md bg-Sblue-300 py-3" (click)="translateDefintions('english')" *ngIf="language == 'english'">English</button>
             <button class=" rounded-l-md bg-Sblue-300 py-3 bg-opacity-20" (click)="translateDefintions('english')" *ngIf="language != 'english'">English</button>
-            <button class=" rounded-r-md bg-Sblue-300 bg-opacity-20 py-3" (click)="translateDefintions('german')" *ngIf="language != 'german'">German</button>
-            <button class=" rounded-r-md bg-Sblue-300 py-3" (click)="translateDefintions('german')" *ngIf="language == 'german'">German</button>
+            <button class=" rounded-r-md bg-Sblue-300 bg-opacity-20 py-3" (click)="translateDefintions(userService.activeUser.Language)" *ngIf="language.toLocaleLowerCase() != userService.activeUser.Language.toLocaleLowerCase()">{{userService.activeUser.Language | titlecase}}</button>
+            <button class=" rounded-r-md bg-Sblue-300 py-3" (click)="translateDefintions(userService.activeUser.Language)" *ngIf="language.toLocaleLowerCase() == userService.activeUser.Language.toLocaleLowerCase()">{{userService.activeUser.Language | titlecase}}</button>
         </div>
         <div *ngFor="let slang of words">
             <div class="glass-blue h-50 m-5 p-5 place-content-center text-Sblack-400">

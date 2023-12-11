@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { UserService } from '../../../services/user.service';
+import { TranslationService } from '../../../services/translation.service';
 
 @Component({
   selector: 'app-quiz-page',
@@ -9,191 +10,208 @@ import { Observable } from 'rxjs';
 })
 export class QuizPageComponent implements OnInit{
 
-  constructor (private http: HttpClient) {}
-
-  getApiTranslate(): Observable<any> {
-    return this.http.get("http://127.0.0.1:5000/translate/german/what does barbie mean?")
-  }
+  constructor (private http: HttpClient, public userService: UserService, private translationService: TranslationService) {}
+ 
   slangQuestions: { Question: string; Options: string[]; Answer: string, Completed: boolean }[] = [];
+  percentageCompleted: number = 0
+  
   ngOnInit(): void {
-    this.getApiTranslate().subscribe((data: any) => {
-      console.log(data.translation)
-    })
+
+    this.percentageCompleted = Math.round((this.userService.activeUser.Points / 27) * 100)
 
     this.slangQuestions = [
       {
-        Question: "What does ‘Barbie’ mean?",
-        Options: ["Brilliant", "Barbeque", "Someone", "Drama"],
-        Answer: "Barbeque",
+        Question: "What slang word stands for ‘Barbeque’?",
+        Options: ["Brillo", "Barbie", "Snag", "Dunny"],
+        Answer: "Barbie",
         Completed: false,
       },
       {
-        Question: "What does ‘Brekkie’ mean?",
-        Options: ["Breakfast", "Break", "Bolster", "Tragedy"],
-        Answer: "Breakfast",
+        Question: "What slang word stands for ‘Breakfast’?",
+        Options: ["Bretho", "Brekkie", "Bonza", "Trago"],
+        Answer: "Brekkie",
         Completed: false,
       },
       {
-        Question: "What is a ‘Bottle-o’?",
-        Options: ["Bottle Recycling Facility", "Bottle", "Bottle of Beer", "Alcohol Shop"],
-        Answer: "Alcohol Shop",
+        Question: "What slang word stands for ‘Alcohol Shop’?",
+        Options: ["Bottle-o", "Shop O Beer", "Beero", "Wine Tuck Shop"],
+        Answer: "Bottle-o",
         Completed: false,
       },
       {
-        Question: "What is ‘Chrissy’?",
-        Options: [
-          "The nickname for someone called Christina",
-          "A Christian",
-          "Christmas",
-          "An annoying thing",
-        ],
-        Answer: "Christmas",
+        Question: "What slang word stands for ‘Christmas’?",
+        Options: ["Chrissy", "Jingle Bells", "Christday", "Massy"],
+        Answer: "Chrissy",
         Completed: false,
       },
       {
-        Question: "What does ‘Daggy’ mean?",
-        Options: ["Cheap", "Loose", "Scruffy/Unfashionable", "A Dog"],
-        Answer: "Scruffy/Unfashionable",
+        Question: "What slang word stands for ‘Scruffy/Unfashionable’?",
+        Options: ["Cheapo", "Loosy", "Daggy", "Darned"],
+        Answer: "Daggy",
         Completed: false,
       },
       {
-        Question: "What is an ‘Esky’?",
-        Options: ["Portable cooler container", "A Husky (dog)", "Element", "Scruffy"],
-        Answer: "Portable cooler container",
+        Question: "What slang word stands for ‘Portable cooler container’?",
+        Options: ["Esky", "Chiller Box", "Colder", "Freezer"],
+        Answer: "Esky",
         Completed: false,
       },
       {
-        Question: "What does ‘G’day’ mean?",
-        Options: ["Hello", "Good Day", "Hi", "Hey"],
-        Answer: "Hello",
+        Question: "What slang word stands for ‘Good Day’?",
+        Options: ["Hello", "G’Day", "Sunny", "By’by"],
+        Answer: "G’Day",
         Completed: false,
       },
       {
-        Question: "What is ‘Maccas’?",
-        Options: ["McDonald’s", "A Nickname", "A place", "Magnificent"],
-        Answer: "McDonald’s",
+        Question: "What slang word stands for ‘McDonalds’?",
+        Options: ["Maccas", "A Nickname", "Mickey D’s", "MCDs"],
+        Answer: "Maccas",
         Completed: false,
       },
       {
-        Question: "What does ‘She’ll be right’ mean?",
-        Options: ["It'll be okay", "Your friend will be okay", "What could go wrong?", "That's not correct"],
-        Answer: "It'll be okay",
+        Question: "What slang word stands for ‘It’ll be okay’?",
+        Options: ["Fully right", "She’ll be right", "Fine as", "Unworryable"],
+        Answer: "She’ll be right",
         Completed: false,
       },
       {
-        Question: "What does ‘Ripper’ mean?",
-        Options: ["Something rips/tears", "Excellent", "A fart", "Well done"],
-        Answer: "Excellent",
+        Question: "What slang word stands for ‘fart’?",
+        Options: ["Farten", "Rippo", "Ripper", "Gaso"],
+        Answer: "Ripper",
         Completed: false,
       },
       {
-        Question: "What is a ‘Servo’?",
-        Options: ["A motor", "A service station/gas station", "A type of Australian food", "A roundabout"],
-        Answer: "A service station/gas station",
+        Question: "What slang word stands for ‘Service Station’?",
+        Options: ["Servo", "Gaso", "Station O Serves", "Servico"],
+        Answer: "Servo",
         Completed: false,
       },
       {
-        Question: "What are ‘Thongs’?",
-        Options: ["Underwear", "A type of footwear", "A tradition", "A food"],
-        Answer: "A type of footwear",
+        Question: "What slang word stands for ‘Shoes you wear to the beach’?",
+        Options: ["Thongs", "Flipos", "Sandals", "Beach shoes"],
+        Answer: "Thongs",
         Completed: false,
       },
       {
-        Question: "What is a ‘Ute’?",
-        Options: ["Utility vehicle", "A type of tent", "A nickname", "Underground"],
-        Answer: "Utility vehicle",
+        Question: "What slang word stands for ‘Utility vehicle’?",
+        Options: ["Veco", "Ute", "Servo", "Undo"],
+        Answer: "Ute",
         Completed: false,
       },
       {
-        Question: "What is a ‘Yabby’?",
-        Options: ["A nickname", "A car", "A person who likes Sydney", "A type of freshwater crayfish"],
-        Answer: "A type of freshwater crayfish",
+        Question: "What slang word stands for ‘Crayfish’?",
+        Options: ["Fisho Cray", "Seacrayo", "Yabby", "Crayo"],
+        Answer: "Yabby",
         Completed: false,
       },
       {
-        Question: "What is a ‘Breather’?",
-        Options: ["A tool to help asthmatics", "A short break", "A sleep", "A difficult task"],
-        Answer: "A short break",
+        Question: "What slang word stands for ‘A short break’?",
+        Options: ["Resto", "Breather", "Shortie", "Breako"],
+        Answer: "Breather",
         Completed: false,
       },
       {
-        Question: "What is a ‘Dunny’?",
-        Options: ["A bad situation", "A Dream", "A toilet", "A town in eastern Sydney"],
-        Answer: "A toilet",
+        Question: "What slang word stands for ‘Toilet’?",
+        Options: ["Dunny", "Toilo", "Loo", "Bathroo"],
+        Answer: "Dunny",
         Completed: false,
       },
       {
-        Question: "What is ‘Footy’?",
-        Options: ["Football (Generally AFL or NRL)", "Soccer", "A fireman", "Your foot"],
-        Answer: "Football (Generally AFL or NRL)",
+        Question: "What slang word stands for ‘AFL/NRL’?",
+        Options: ["Footsol", "Socco", "Footy", "The RLs"],
+        Answer: "Footy",
         Completed: false,
       },
       {
-        Question: "What does ‘Mate’ mean?",
-        Options: ["A nickname", "Your mum", "Maternal", "Friend"],
-        Answer: "Friend",
+        Question: "What slang word stands for ‘Friend’?",
+        Options: ["Mate", "Brutha", "Compo", "Cuz"],
+        Answer: "Mate",
         Completed: false,
       },
       {
-        Question: "What is an ‘Op Shop’?",
-        Options: ["Thrift store", "Opportunity", "Options", "A supermarket"],
-        Answer: "Thrift store",
+        Question: "What slang word stands for ‘Thrift Store’?",
+        Options: ["Thrift-o", "Op-shop", "Marko", "Shop-op"],
+        Answer: "Op-shop",
         Completed: false,
       },
       {
-        Question: "What is a ‘Bogan’?",
-        Options: ["An alcoholic", "An unsophisticated person", "A beer", "A broken tree branch"],
-        Answer: "An unsophisticated person",
+        Question: "What slang word stands for ‘an unsophisticated person’?",
+        Options: ["Ranga", "Unsopho", "Bogan", "Lamo"],
+        Answer: "Bogan",
         Completed: false,
       },
       {
-        Question: "What are ‘Coppers’?",
-        Options: ["A metal", "An Australian dish", "A town in Melbourne", "Police Officers"],
-        Answer: "Police Officers",
+        Question: "What slang word stands for ‘police’?",
+        Options: ["Popo", "Coppers", "Polico", "Cops"],
+        Answer: "Coppers",
         Completed: false,
       },
       {
-        Question: "What does ‘Grog’ mean?",
-        Options: ["Alcohol", "Grungy", "Dirty", "Grimey"],
-        Answer: "Alcohol",
+        Question: "What slang word stands for ‘Alcohol’?",
+        Options: ["Grog", "Alco", "Spirits", "Vodo"],
+        Answer: "Grog",
         Completed: false,
       },
       {
-        Question: "What is a ‘Joey’?",
-        Options: ["A jelly bean", "A baby kangaroo", "A jumping spider", "A jump rope/skipping rope"],
-        Answer: "A baby kangaroo",
+        Question: "What slang word stands for ‘Mosquito’?",
+        Options: ["Smazzos", "Mozzas", "Mossie", "Quitos"],
+        Answer: "Mozzie",
         Completed: false,
       },
       {
-        Question: "What is a ‘Mozzie’?",
-        Options: ["Food", "Mother", "Mosquito", "Many"],
-        Answer: "Mosquito",
+        Question: "What slang word stands for ‘Sausages’?",
+        Options: ["Sausos", "Snags", "Sigos", "Servo"],
+        Answer: "Snags",
         Completed: false,
       },
       {
-        Question: "What are ‘Snags’?",
-        Options: ["Problems", "Sausages", "Signs", "Singers"],
-        Answer: "Sausages",
+        Question: "What slang word stands for ‘can of beer or a small boat’?",
+        Options: ["Alum-tin-ium", "Beerboato", "Tinnie", "Alumo"],
+        Answer: "Beerboato",
         Completed: false,
       },
       {
-        Question: "What is a ‘Tinnie'?",
-        Options: ["A can of beer", "A small boat (generally aluminum)", "A large sheet of Tin", "A tin can"],
-        Answer: "Both A can of beer and A small boat (generally aluminum)",
+        Question: "What slang word stands for ‘taking a fake sick day’?",
+        Options: ["Puko", "Chucking a sickie", "Fakie", "Sicko"],
+        Answer: "Chucking a sickie",
         Completed: false,
       },
-      {
-        Question: "What would you be doing if you ‘Chuck a sickie’?",
-        Options: ["Puking", "Throwing a ball", "Taking a fake sick day", "Dying"],
-        Answer: "Taking a fake sick day",
-        Completed: false,
-      },
-    ]
+    ];
+
+    let questionsCompleted = this.userService.activeUser.Points
+
+    while (questionsCompleted > 0) {
+      this.slangQuestions.shift()
+      questionsCompleted -= 1
+    }
   }
 
   questionAnswered(correct: boolean): void {
     if (correct) {
       this.slangQuestions.shift()
+      this.userService.activeUser.Points += 1
+
+      for (let i = 0; i < this.userService.users.length; i++) {
+        const element = this.userService.users[i];
+        if (element.Id == this.userService.activeUser.Id) {
+          this.userService.users[i] = this.userService.activeUser
+        }
+      }
+
+      this.userService.putUsers(this.userService.users)
+      this.percentageCompleted = Math.round((this.userService.activeUser.Points / 27) * 100)
     }
   }
+
+  language: string = "english"
+
+  translateQuestion(lang: string): void {
+    this.language = lang.toLowerCase()
+
+    this.translationService.getTranslation(this.language, this.slangQuestions[0].Question).subscribe((translation: any) => {
+      this.slangQuestions[0].Question = translation.translation
+    })
+  }
+
+
 }

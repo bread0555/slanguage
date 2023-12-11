@@ -23,7 +23,7 @@
             <div class="flex my-7">
                 <div class="w-9 h-9 bg-red-400 rounded-full opacity-80" *ngIf="!checkIfValid('pin')"></div>
                 <div class="w-9 h-9 bg-emerald-400 rounded-full opacity-80" *ngIf="checkIfValid('pin')"></div>
-                <input type="text" class=" ml-2 outline outline-2 outline-gray-400 text-center bg-opacity-10 bg-slate-100" placeholder="Enter Pin" [(ngModel)]="userPin">
+                <input type="password" class=" ml-2 outline outline-2 outline-gray-400 text-center bg-opacity-10 bg-slate-100" placeholder="Enter Pin" [(ngModel)]="userPin">
             </div>
 
             <!-- select a language -->

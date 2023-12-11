@@ -19,6 +19,8 @@ import { QuizPageComponent } from './quiz-page/quiz-page.component';
 import { QuestionComponent } from './question/question.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { NgHttpLoaderModule } from 'ng-http-loader'; // <============
+
 
 
 
@@ -47,7 +49,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     MessagesModule,
     ToastModule,
     HttpClientModule,
-    SelectButtonModule
+    SelectButtonModule,
+    NgHttpLoaderModule.forRoot()
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
