@@ -18,6 +18,8 @@ import { LessonPageComponent } from './lesson-page/lesson-page.component';
 import { QuizPageComponent } from './quiz-page/quiz-page.component';
 import { QuestionComponent } from './question/question.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SelectButtonModule } from 'primeng/selectbutton';
+
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MessagesModule,
     ToastModule,
-    HttpClientModule
+    HttpClientModule,
+    SelectButtonModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

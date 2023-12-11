@@ -9,6 +9,14 @@ export class UserService {
   constructor() { }
 
   users: User[] = []
+
+  activeUser: User = {
+    Id: 0,
+    Name: '',
+    Pin: 0,
+    Language: '',
+    Points: 0
+  }
   
   // HANDLE USER DATA
   public getUsers(): User[] {
@@ -23,19 +31,14 @@ export class UserService {
 
   // LOG IN
   logged_in: boolean = false
-  logged_in_user: User = {
-    Id: 0,
-    Name: '',
-    Pin: 0,
-    Language: ''
-  }
   
   public userLogin(userDetails: User): boolean {
     for (let i = 0; i < this.users.length; i++) {
       let user = this.users[i]
 
       if (user.Name == userDetails.Name && user.Pin == userDetails.Pin) {
-        
+        this.activeUser = user
+        console.log(this.activeUser)
         return true
       }
     }

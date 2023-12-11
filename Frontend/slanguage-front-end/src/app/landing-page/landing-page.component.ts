@@ -15,7 +15,8 @@ export class LandingPageComponent {
     Id: 0,
     Name: '',
     Pin: 0,
-    Language: 'Languages'
+    Language: 'Languages',
+    Points: 0
   }
 
   constructor (private userService: UserService, private messageService: MessageService, private router: Router) {}
